@@ -9,11 +9,11 @@ import { RegisterComponent } from './register/register.component';
 // Rutas para componentes NO logeado 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'registro', component: RegisterComponent }
+    { path: 'registro', component: RegisterComponent }, 
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes)],       // Menú raiz
     exports: [RouterModule]
 })
 export class AuthRoutingModule { }

@@ -1,1 +1,35 @@
-<p>grafica1 works!</p>
+<div class="row">
+
+    <div class="col-3">
+        <app-graf-donut
+            [titulo]="'Almacén CRM'" 
+            [doughnutChartData]="doughnutChartData1" 
+            >
+        </app-graf-donut>
+    </div>
+
+    <div class="col-3">
+        <app-graf-donut
+            [titulo]="'Almacén Igualada'" 
+            [doughnutChartData]="doughnutChartData2" 
+            >
+        </app-graf-donut>
+    </div>
+
+
+    <div class="col-3">
+        <app-graf-donut
+        [titulo]="'Almacén 3'" 
+        [doughnutChartData]="doughnutChartData3" 
+        >
+    </app-graf-donut>
+    </div>
+
+    <div class="col-3"> <app-graf-donut
+        [titulo]="'Almacén 4'" 
+        [doughnutChartData]="doughnutChartData4" 
+        >
+    </app-graf-donut>
+    </div>
+
+</div>
