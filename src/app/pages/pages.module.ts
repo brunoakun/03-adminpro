@@ -13,6 +13,7 @@ import { PanelComponent } from './panel/panel.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
+import { UsrConfigComponent } from './usr-config/usr-config.component';
 
 
 @NgModule({
@@ -20,13 +21,15 @@ import { PagesComponent } from './pages.component';
     PanelComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    UsrConfigComponent
   ],
   exports: [
     PanelComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    UsrConfigComponent
   ],
   imports: [
     CommonModule,

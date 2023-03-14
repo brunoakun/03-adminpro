@@ -1,3 +1,4 @@
+import { ConfigService } from './../services/config.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class PagesComponent implements OnInit {
-
   ano: number = new Date().getFullYear();
 
-  constructor() { }
+  constructor(public configService: ConfigService) { }
 
   ngOnInit(): void {
+    // Tema guardado o por defecto
+    this.configService;
   }
 
 }

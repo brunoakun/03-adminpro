@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router"
 import { Grafica1Component } from "./grafica1/grafica1.component"
 import { PanelComponent } from "./panel/panel.component"
 import { ProgressComponent } from "./progress/progress.component"
+import { UsrConfigComponent } from './usr-config/usr-config.component';
 
 // Rutas hijas para componentes logeado 
 
@@ -15,6 +16,7 @@ const routes: Routes = [
             { path: '', component: PanelComponent },
             { path: 'progress', component: ProgressComponent },
             { path: 'grafico1', component: Grafica1Component },
+            { path: 'config', component: UsrConfigComponent },
         ]
     }
 ];
