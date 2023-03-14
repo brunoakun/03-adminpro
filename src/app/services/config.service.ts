@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Servicio para recuperar la configuración de usuario
+ */
+
 @Injectable({
   providedIn: 'root'
 })

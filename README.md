@@ -25,3 +25,16 @@ npm install
 ## gráficos:
 npm install --save ng2-charts
 npm install --save chart.js
+
+## Crear configuración Usr, guardar y recuperar de localstorage
+crear el componente UsrConfigComponent
+crear el servicio ConfigService
+
+## Crear un menú de opciones desde un servicio
+Crear el servicio SidebarService
+Desde el componente SidebarComponent, montar dinamicamente las opciones del menú con lo devuelto por el servicio
+
+
+## Routerlink's
+
+

@@ -15,17 +15,23 @@
                         <li><a href="javascript:void()">My Balance</a></li>
                         <li><a href="javascript:void()">Inbox</a></li>
                         <li><a routerLink="config">Account Setting</a></li>
-                        <li><a href="javascript:void()">Logout</a></li>
+                        <li><a routerLink="/login">Logout</a></li>
                     </ul>
                 </li>
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
-                                class="label label-rouded label-themecolor pull-right">10</span></span></a>
+                <li *ngFor="let item of opcionesMenu">
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                        <i class="{{item.icono}}"></i>
+                        <span class="hide-menu">
+                            {{item.titulo}}
+                            <span class="label label-rouded label-themecolor pull-right">{{item.submenu.length}}</span>
+                        </span>
+                    </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a routerLink="progress">Input / Output</a></li>
-                        <li><a routerLink="grafico1">Gáfico donut</a></li>
+                        <li *ngFor="let itemSub of item.submenu">
+                            <a routerLink="{{itemSub.url}}">{{itemSub.titulo}}</a>
+                        </li> 
                     </ul>
                 </li>
 
