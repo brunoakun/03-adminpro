@@ -4,24 +4,24 @@ import { CommonModule } from '@angular/common';
 
 // Componentes
 import { HeaderComponent } from './header/header.component';
-import { BeadCrumsComponent } from './bead-crums/bead-crums.component';
+import { BreadcrumbsComponent } from './bead-crums/bead-crums.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    BeadCrumsComponent,
+    BreadcrumbsComponent,
     SidebarComponent,
   ],
   exports: [
     HeaderComponent,
-    BeadCrumsComponent,
+    BreadcrumbsComponent,
     SidebarComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule, // Agrega RouterModule aquí
   ]
 })
 export class SharedModule { }

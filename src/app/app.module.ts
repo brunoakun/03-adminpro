@@ -12,6 +12,7 @@ import { PagesModule } from './pages/pages.module';
 // Componentes
 import { AppComponent } from './app.component';
 import { Page404Component } from './page404/page404.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import { Page404Component } from './page404/page404.component';
     AuthModule,
     PagesModule,
     SharedModule,
-    FormsModule
+    FormsModule,    
+    HttpClientModule // Agrega HttpClientModule aquí
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,14 +19,16 @@ export class SidebarService {
         { titulo: 'Main', url: '/' },
         { titulo: 'Input / Output', url: 'progress' },
         { titulo: 'Gáfico donut', url: 'grafico1' },
+        { titulo: 'Promesas', url: 'promesas' },
+        { titulo: 'Rxjs', url: 'rxjs' },
       ]
-    },{
-      titulo: 'Dashboard 22',
-      icono: 'mdi mdi-gauge',
+    },
+    {
+      titulo: 'Usuarios',
+      icono: 'mdi mdi-account',
       submenu: [
-        { titulo: 'Input / Output', url: 'progress' },
-        { titulo: 'Gáfico donut', url: 'grafico1' },
+        { titulo: 'Listado', url: 'usr_lista' },
       ]
     }
-]
+  ]
 }

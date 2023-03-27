@@ -1,0 +1,32 @@
+<div *ngIf="!usuarios.length" class="card">
+    <div class="card-body">
+        <h3>Sin datos...</h3>
+    </div>
+</div>
+
+<div *ngIf="usuarios.length" class="card">
+    <div class="card-body">
+        <h4 class="card-title">Data Table</h4>
+        <h6 class="card-subtitle">Data table example</h6>
+        <div class="table-responsive m-t-40">
+            <table id="myTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>email</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usr of usuarios">
+                        <td> {{usr.first_name}} {{usr.last_name}}</td>
+                        <td>{{usr.email}}</td>
+                        <td>
+                            <img class="avatar" src="{{usr.avatar}}" alt="user">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

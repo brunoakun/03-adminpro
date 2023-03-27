@@ -14,6 +14,9 @@ import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
 import { UsrConfigComponent } from './usr-config/usr-config.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
+import { UsrListaComponent } from './usr-lista/usr-lista.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { UsrConfigComponent } from './usr-config/usr-config.component';
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
-    UsrConfigComponent
+    UsrConfigComponent,
+    PromesasComponent,
+    RxjsComponent,
+    UsrListaComponent
   ],
   exports: [
     PanelComponent,

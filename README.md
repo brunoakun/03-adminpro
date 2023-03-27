@@ -11,7 +11,7 @@ componentes compartidos (header,sideBar, footer,...)
 Componentes
 Páginas
 
-## Crear módulo 
+## Crear módulo y su routing
 ng g module graficas --routing
 
 2.- El componente pagesComponent.html tiene la plantilla para los componentes logueados
@@ -36,5 +36,8 @@ Desde el componente SidebarComponent, montar dinamicamente las opciones del men�
 
 
 ## Routerlink's
+
+## Crear el Bread Crums desde un los datos del Router
+En el router.ts, añadir el objeto {data} con el título, recuperarlo desde una subscripción en el bread-cums.ts
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SidebarService } from 'src/app/services/sidebar.service';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
