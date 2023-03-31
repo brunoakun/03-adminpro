@@ -8,13 +8,17 @@ import { Grafica1Component } from "./grafica1/grafica1.component"
 import { PanelComponent } from "./panel/panel.component"
 import { ProgressComponent } from "./progress/progress.component"
 import { UsrConfigComponent } from './usr-config/usr-config.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 // Rutas hijas para componentes logeado 
 
 const routes: Routes = [
     {
         // PagesComponent.html tiene la plantilla e incluye un <router-outlet> para el menú hijo
-        path: 'panel', component: PagesComponent,
+        // Solo pueden acceder a estas los usuarios loguineados [AuthGuard]
+        path: 'panel',
+        component: PagesComponent,
+        canActivate: [AuthGuard],
         children: [
             { path: '', component: PanelComponent, data: { titulo: 'Inicio' } },
             { path: 'progress', component: ProgressComponent, data: { titulo: 'Decoradores Input/Output' } },

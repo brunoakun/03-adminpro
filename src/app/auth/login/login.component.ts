@@ -29,20 +29,18 @@ export class LoginComponent implements OnInit {
 
   enviar() {
     const frm = this.loginForm;
-    console.log(frm.value);
     this.usuarioService.logIn(frm.value)
       .subscribe(respuesta => {
-        console.log(respuesta);
         if (respuesta.error) {
           this.notificacionesService.aviso('error', respuesta.mensaje);
         } else {
-          this.notificacionesService.aviso('info', `Bienvenido ${frm.get('email')!.value!}`);
+          this.notificacionesService.aviso('info', `Bienvenido ${respuesta.data.nombre!}`);
           if (frm.get('remember')?.value) {
             localStorage.setItem('loginEmail', frm.get('email')!.value!)
           } else {
             localStorage.removeItem('loginEmail');
           }
-          //this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/');
         }
       })
   }

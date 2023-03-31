@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/services/sidebar.service';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,11 +9,19 @@ import { Route } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   opcionesMenu: any[] = [];
-  constructor(public srvMenu: SidebarService) { }
+  constructor(
+    public srvMenu: SidebarService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.opcionesMenu = this.srvMenu.menu;
     // console.log(this.opcionesMenu)
+  }
+
+  logOut(){
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
   }
 
 }

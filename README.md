@@ -49,3 +49,5 @@ npm install sweetalert2
 npm install ngx-toastr@15.2.2
 npm install @angular/animations --save
 
+## Crear guard para proteger las rutas si no está logIneado
+ng g guard guards/auth

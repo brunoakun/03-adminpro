@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public usuarioService: UsuarioService,
-    private notificacionesService: NotificacionesService
+    private notificacionesService: NotificacionesService,
+    private router: Router
   ) { }
 
   public regiterForm = this.fb.group({
@@ -41,7 +43,9 @@ export class RegisterComponent implements OnInit {
         if (respuesta.error) {
           this.notificacionesService.aviso('error', respuesta.mensaje);
         } else {
-          this.notificacionesService.aviso('success', `Usuario creado correctamente`);
+          this.notificacionesService.aviso('success', `Usuario creado correctamente, ya puedes entrar con tus credenciales`);
+          localStorage.removeItem('loginEmail');
+          this.router.navigateByUrl('/login');
         }
       })
   }
