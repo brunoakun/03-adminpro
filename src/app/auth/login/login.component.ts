@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         if (respuesta.error) {
           this.notificacionesService.aviso('error', respuesta.mensaje);
         } else {
-          this.notificacionesService.aviso('info', `Bienvenido ${respuesta.data.nombre!}`);
+          this.notificacionesService.aviso('info', `Bienvenido ${respuesta.data.userdata.nombre!}`);
           if (frm.get('remember')?.value) {
             localStorage.setItem('loginEmail', frm.get('email')!.value!)
           } else {

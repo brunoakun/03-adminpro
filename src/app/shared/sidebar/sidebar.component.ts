@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/services/sidebar.service';
-import { Route, Router } from '@angular/router';
+import { Route, Router } from '@angular/router'; 
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ export class SidebarComponent implements OnInit {
   opcionesMenu: any[] = [];
   constructor(
     public srvMenu: SidebarService,
+    private usuarioService:UsuarioService,
     private router: Router
   ) { }
 
@@ -23,5 +25,16 @@ export class SidebarComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigateByUrl('/login');
   }
+
+  
+  getUserFoto() {
+    return (this.usuarioService.getUserFoto());
+  }
+
+  getUserData() {
+    console.log(this.usuarioService.userdata);
+    return this.usuarioService.userdata;
+  }
+
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,15 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.usuarioService.logOut();
+  }
+
+  getUserFoto() {
+    return (this.usuarioService.getUserFoto());
+  }
+
+  getUserData() {
+    console.log(this.usuarioService.userdata);
+    return this.usuarioService.userdata;
   }
 
 }

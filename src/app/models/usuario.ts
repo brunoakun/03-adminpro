@@ -6,6 +6,7 @@ export class Usuario {
         public rol?: string,
         public email?: string,
         public nombre?: string,
-        public telefono?: string
+        public telefono?: string,
+        public foto?: string
     ) { }
 }

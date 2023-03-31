@@ -51,3 +51,5 @@ npm install @angular/animations --save
 
 ## Crear guard para proteger las rutas si no está logIneado
 ng g guard guards/auth
+
+# Subida de imagen desde el Front-end hasta el Back-end

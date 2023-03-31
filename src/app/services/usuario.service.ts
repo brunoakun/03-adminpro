@@ -5,6 +5,7 @@ import { RegistroUsuario } from '../interfaces/registro-usuario';
 import { environment } from 'src/environments/environment';
 import { Observable, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 export class UsuarioService {
 
   apiURL: string = environment.apiURL;
+  userdata: Usuario = {}
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -41,7 +44,8 @@ export class UsuarioService {
       .pipe(
         tap(resp => {
           if (resp.data.token) {
-            console.log(resp.data.token);
+            console.log(resp.data);
+            this.userdata = resp.data.userdata;
             localStorage.setItem('token', resp.data.token);
           }
         })
@@ -67,8 +71,9 @@ export class UsuarioService {
       .pipe(
         tap(resp => {
           if (resp.data.token) {
-            // guardamos el nuevo token
+            // guardamos el nuevo token y cargamos los valores del usuario
             localStorage.setItem('token', resp.data.token);
+            this.userdata = resp.data.userdata;
           }
         }),
         map(resp => {
@@ -76,6 +81,18 @@ export class UsuarioService {
           return (!resp.error);
         })
       );
+  }
+
+  // Datos del usuario
+
+  getUserFoto() {
+    var foto = this.userdata.foto;
+    if (foto) {
+      foto = `${environment.fotoDir}/${foto}`;
+    } else {
+      foto = `${environment.fotoDir}/_noUsr.png`;
+    }
+    return (foto);
   }
 
 }
