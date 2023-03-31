@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,8 @@ import { RegisterComponent } from './register/register.component';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule, 
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

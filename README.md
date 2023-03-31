@@ -1,4 +1,4 @@
-# 03Adminpro
+# AlmaGest
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.0.
 
@@ -10,6 +10,9 @@ módulos
 componentes compartidos (header,sideBar, footer,...)
 Componentes
 Páginas
+
+ng generate component nombre-componente --style none
+
 
 ## Crear módulo y su routing
 ng g module graficas --routing
@@ -40,4 +43,9 @@ Desde el componente SidebarComponent, montar dinamicamente las opciones del men�
 ## Crear el Bread Crums desde un los datos del Router
 En el router.ts, añadir el objeto {data} con el título, recuperarlo desde una subscripción en el bread-cums.ts
 
+## 14 LogIn / Sweet Alert / toastr / LocalStorage del token / Logout
+ 
+npm install sweetalert2
+npm install ngx-toastr@15.2.2
+npm install @angular/animations --save
 

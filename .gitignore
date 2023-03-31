@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Plantilla de AdminPro Bootstrap Theme — Single Use 
+/work
+
 # Compiled output
 /dist
 /tmp

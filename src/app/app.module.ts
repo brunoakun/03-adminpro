@@ -13,6 +13,10 @@ import { PagesModule } from './pages/pages.module';
 import { AppComponent } from './app.component';
 import { Page404Component } from './page404/page404.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -26,9 +30,15 @@ import { HttpClientModule } from '@angular/common/http';
     AuthModule,
     PagesModule,
     SharedModule,
-    FormsModule,    
-    HttpClientModule // Agrega HttpClientModule aquí
+    FormsModule,
+    HttpClientModule, // Agrega HttpClientModule aquí, 
 
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot({
+      timeOut: 5000, 
+      preventDuplicates: true,
+      closeButton: true,
+    }), 
   ],
   providers: [],
   bootstrap: [AppComponent]
