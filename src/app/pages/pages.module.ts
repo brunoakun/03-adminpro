@@ -1,4 +1,3 @@
-import { ComponentesModule } from './../componentes/componentes.module';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,7 +5,10 @@ import { CommonModule } from '@angular/common';
 // Módulos
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { ComponentesModule } from './../componentes/componentes.module';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 // Componentes
 import { PanelComponent } from './panel/panel.component';
@@ -17,7 +19,7 @@ import { UsrConfigComponent } from './usr-config/usr-config.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsrListaComponent } from './usr-lista/usr-lista.component';
-
+import { UsrPerfilComponent } from './usr-perfil/usr-perfil.component';
 
 @NgModule({
   declarations: [
@@ -28,21 +30,29 @@ import { UsrListaComponent } from './usr-lista/usr-lista.component';
     UsrConfigComponent,
     PromesasComponent,
     RxjsComponent,
-    UsrListaComponent
+    UsrListaComponent,
+    UsrPerfilComponent
   ],
   exports: [
     PanelComponent,
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
-    UsrConfigComponent
+    UsrConfigComponent,
+    PromesasComponent,
+    RxjsComponent,
+    UsrListaComponent,
+    UsrPerfilComponent
   ],
   imports: [
     CommonModule,
     RouterModule,     // en pages.component se utiliza el  <router-outlet>
     SharedModule,
     FormsModule,
-    ComponentesModule,    
+    ReactiveFormsModule,
+    ComponentesModule ,
+    NgxDatatableModule
+     
   ]
 })
 export class PagesModule { }

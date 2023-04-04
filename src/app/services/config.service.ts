@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 /**
  * Servicio para recuperar la configuración de usuario
@@ -13,7 +14,7 @@ export class ConfigService {
   constructor() {
     // Cargar el tema desde localStorage
 
-    const tema = localStorage.getItem('tema') || './assets/css/colors/default.css';
+    const tema = localStorage.getItem('tema') || `./assets/css/colors/${environment.defaultTema}`;
     this.linkTheme?.setAttribute('href', tema);
   }
 

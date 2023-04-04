@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   public loginForm = this.fb.group({
     email: [localStorage.getItem('loginEmail') || '', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    remember: [false]
+    remember: [localStorage.getItem('recordar') === 'true' || false]
   })
 
   ngOnInit(): void {
@@ -36,9 +36,11 @@ export class LoginComponent implements OnInit {
         } else {
           this.notificacionesService.aviso('info', `Bienvenido ${respuesta.data.userdata.nombre!}`);
           if (frm.get('remember')?.value) {
-            localStorage.setItem('loginEmail', frm.get('email')!.value!)
+            localStorage.setItem('loginEmail', frm.get('email')!.value!);
+            localStorage.setItem('recordar', 'true');
           } else {
             localStorage.removeItem('loginEmail');
+            localStorage.removeItem('recordar');
           }
           this.router.navigateByUrl('/');
         }

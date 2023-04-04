@@ -31,8 +31,11 @@
             <!-- ============================================================== -->
             <ul class="navbar-nav mr-auto">
                 <!-- This is  -->
-                <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"
-                        href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                <li class="nav-item">
+                    <a id="menuTgl" class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)">
+                        <i class="ti-menu"></i>
+                    </a>
+                </li>
                 <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"
                         href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                 <li class="nav-item hidden-sm-down"></li>
@@ -208,8 +211,9 @@
                                     </div>
                                     <div class="u-text">
                                         <h4>{{getUserData().nombre}}</h4>
-                                        <p class="text-muted">{{getUserData().rol}}</p><a href="pages-profile.html"
-                                            class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
+                                        <p class="text-muted">{{getUserData().rol}}</p>
+                                        <a routerLink="./usr_perfil" class="btn btn-rounded btn-danger btn-sm">Ver
+                                            Perfil</a>
                                     </div>
                                 </div>
                             </li>

@@ -21,14 +21,14 @@ const inicializarCustomJs = () => {
         var set = function () {
             var width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
             var topOffset = 0;
-            if (width < 1170) {
+            // if (width < 1170) {
                 $("body").addClass("mini-sidebar");
                 $('.navbar-brand span').hide();
                 $(".sidebartoggler i").addClass("ti-menu");
-            } else {
-                $("body").removeClass("mini-sidebar");
-                $('.navbar-brand span').show();
-            }
+            // } else {
+            //     $("body").removeClass("mini-sidebar");
+            //     $('.navbar-brand span').show();
+            // }
 
             var height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
             height = height - topOffset;
@@ -40,6 +40,8 @@ const inicializarCustomJs = () => {
         };
         $(window).ready(set);
         $(window).on("resize", set);
+
+
 
         // ============================================================== 
         // Theme options
@@ -57,6 +59,8 @@ const inicializarCustomJs = () => {
 
             }
         });
+
+
 
         // this is for close icon when navigation open in mobile view
         $(".nav-toggler").click(function () {
@@ -103,7 +107,7 @@ const inicializarCustomJs = () => {
         //tooltip
         // ============================================================== 
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
         })
         // ============================================================== 
         //Popover
@@ -163,3 +167,6 @@ const inicializarCustomJs = () => {
 
 // Cada vez que se cargue, se ejecutará esta instrucción, para inicializar los plugIn's y demás js del tema
 inicializarCustomJs();
+
+ 
+

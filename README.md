@@ -53,3 +53,6 @@ npm install @angular/animations --save
 ng g guard guards/auth
 
 # Subida de imagen desde el Front-end hasta el Back-end
+
+## datatables 
+npm install @swimlane/ngx-datatable --save

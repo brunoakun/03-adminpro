@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +7,9 @@ import { environment } from 'src/environments/environment';
   styles: [
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor(private usuarioService: UsuarioService) { }
-
-  ngOnInit(): void {
-  }
 
   logOut() {
     this.usuarioService.logOut();
@@ -24,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getUserData() {
-    console.log(this.usuarioService.userdata);
+    // console.log('getUserData()',this.usuarioService.userdata);
     return this.usuarioService.userdata;
   }
 

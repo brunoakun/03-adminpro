@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   titulo: 'DEV',
   apiURL: 'http://localhost:8080/api',
-  fotoDir: 'http://localhost:8080/data/fotos'
+  fotoDir: 'http://localhost:8080/data/fotos',
+  defaultTema: 'default-dark.css'
 };
 
 /*

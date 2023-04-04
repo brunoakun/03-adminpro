@@ -1,0 +1,78 @@
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Perfil de usuario</h4>
+                <h6 class="card-subtitle">Modificar tus datos de usuario</h6>
+                <form class="form p-t-20" [formGroup]="perfilForm" (ngSubmit)="enviar()">
+
+                    <!-- nombre -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" formControlName="nombre" id="nombre" class="form-control"
+                                placeholder="Nombre y apellidos">
+                        </div>
+                    </div>
+
+                    <!-- email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input type="email" formControlName="email" class="form-control" id="email"
+                                placeholder="Enter email">
+                        </div>
+                    </div>
+
+                    <hr class="mt2">
+                    <h6 class="card-subtitle">Opcional, modificar contraseña de acceso</h6>
+
+                    <!-- password -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input type="password" class="form-control" id="password" placeholder="">
+                        </div>
+                    </div>
+
+                    <!-- password2 -->
+                    <div class="form-group">
+                        <label for="password2">Confirmar Password</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input type="password" class="form-control" id="password2" placeholder="Enter email">
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="btn btn-success btn-block waves-effect waves-light m-r-10">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Avatar</h4>
+                <h6 class="card-subtitle">Imagen del usuario</h6>
+
+                <img src="">
+                <br>
+                <input type="file">
+                <br>
+                <br>
+
+                <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10">Cambiar
+                    imagen</button>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

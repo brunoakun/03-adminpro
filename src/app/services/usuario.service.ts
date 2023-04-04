@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegistroUsuario } from '../interfaces/registro-usuario';
 import { environment } from 'src/environments/environment';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario';
+import { NotificacionesService } from './notificaciones.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,9 @@ export class UsuarioService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private notificacionesService: NotificacionesService
   ) { }
-
 
 
   crearUsuario(formData: RegistroUsuario) {
@@ -42,9 +43,14 @@ export class UsuarioService {
       params: params,
     })
       .pipe(
+        catchError(error => {
+          console.log('Error al intentar autenticar:', error);
+          this.notificacionesService.aviso('error', 'Error al intentar autenticar, el servidor no está respondiendo. Por favor, intenta de nuevo más tarde.');
+          return throwError(() => new Error(error));
+        }),
         tap(resp => {
           if (resp.data.token) {
-            console.log(resp.data);
+            console.log('estoy en logIn()',resp.data);
             this.userdata = resp.data.userdata;
             localStorage.setItem('token', resp.data.token);
           }
@@ -69,6 +75,11 @@ export class UsuarioService {
       headers: cabeceras
     })
       .pipe(
+        catchError(error => {
+          console.log('Error al intentar acceder al srvidor:', error);
+          this.notificacionesService.aviso('error', `El servidor ${this.apiURL} no está respondiendo. Por favor, intenta de nuevo más tarde.`);
+          return throwError(() => new Error(error));
+        }),
         tap(resp => {
           if (resp.data.token) {
             // guardamos el nuevo token y cargamos los valores del usuario
@@ -93,6 +104,13 @@ export class UsuarioService {
       foto = `${environment.fotoDir}/_noUsr.png`;
     }
     return (foto);
+  }
+
+
+  getLista() {
+    // Devulve la lista de usuarios
+    const path = `${this.apiURL}/usrList`;
+    return this.http.get<ApiResp>(path);
   }
 
 }
