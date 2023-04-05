@@ -12,7 +12,7 @@
                         <label for="nombre">Nombre</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
-                            <input type="text" formControlName="nombre" id="nombre" class="form-control"
+                            <input type="text" formControlName="nombre" class="form-control"
                                 placeholder="Nombre y apellidos">
                         </div>
                     </div>
@@ -22,8 +22,7 @@
                         <label for="email">Email</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input type="email" formControlName="email" class="form-control" id="email"
-                                placeholder="Enter email">
+                            <input type="email" formControlName="email" class="form-control" id="email">
                         </div>
                     </div>
 
@@ -35,7 +34,8 @@
                         <label for="password">Password</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-lock"></i></div>
-                            <input type="password" class="form-control" id="password" placeholder="">
+                            <input type="password" class="form-control" formControlName="password"
+                                placeholder="Introduce la nueva contraseña">
                         </div>
                     </div>
 
@@ -44,12 +44,14 @@
                         <label for="password2">Confirmar Password</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-lock"></i></div>
-                            <input type="password" class="form-control" id="password2" placeholder="Enter email">
+                            <input type="password" class="form-control" formControlName="password2">
                         </div>
                     </div>
 
-                    <button type="submit"
-                        class="btn btn-success btn-block waves-effect waves-light m-r-10">Enviar</button>
+                    <button type="submit" 
+                        [disabled]="perfilForm.invalid"
+                        class="btn waves-effect waves-light btn-rounded btn-success">Enviar</button>
+
                 </form>
             </div>
         </div>

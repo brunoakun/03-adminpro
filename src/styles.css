@@ -4,7 +4,13 @@
 .pointer {
     cursor: pointer
 }
- 
+
 html {
-    zoom: 80%;  
-  }
+    zoom: 85%;
+}
+
+/* Colores */
+
+.tomato {
+    color: tomato;
+}

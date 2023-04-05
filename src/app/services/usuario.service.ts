@@ -50,7 +50,7 @@ export class UsuarioService {
         }),
         tap(resp => {
           if (resp.data.token) {
-            console.log('estoy en logIn()',resp.data);
+            console.log('estoy en logIn()', resp.data);
             this.userdata = resp.data.userdata;
             localStorage.setItem('token', resp.data.token);
           }
@@ -94,6 +94,7 @@ export class UsuarioService {
       );
   }
 
+
   // Datos del usuario
 
   getUserFoto() {
@@ -111,6 +112,11 @@ export class UsuarioService {
     // Devulve la lista de usuarios
     const path = `${this.apiURL}/usrList`;
     return this.http.get<ApiResp>(path);
+  }
+
+  actualizaUsr(usuario: Usuario) {    
+    const path = `${this.apiURL}/userUpdate/${this.userdata.id}`;
+    return this.http.post<ApiResp>(path, usuario);
   }
 
 }
