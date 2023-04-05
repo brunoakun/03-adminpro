@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 import { ColumnMode } from '@swimlane/ngx-datatable'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-usr-lista',
@@ -9,6 +10,8 @@ import { ColumnMode } from '@swimlane/ngx-datatable'
   styleUrls: ['./usr-lista.component.css']
 })
 export class UsrListaComponent implements OnInit {
+
+  public fotoDir: string = environment.fotoDir;
 
   messages = {
     emptyMessage: `<span class="text-danger">Sin datos...</span>`,

@@ -1,6 +1,6 @@
 <div *ngIf="!usuarios.length" class="card">
   <div class="card-body">
-    <h3>Sin datos...</h3>
+    <h3>Cargando datos...</h3>
   </div>
 </div>
 
@@ -9,32 +9,23 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Filter Option</h4>
-        <h5 class="card-subtitle mt-6">Cabeceras tunning ngx-Datatable</h5>
+        <!-- <h4 class="card-title">Filter Option</h4>
+        <h5 class="card-subtitle mt-6">Cabeceras tunning ngx-Datatable</h5> -->
 
-        <ngx-datatable 
-          class='material' 
-          [columns]="columns" 
-          [columnMode]="'force'" 
-          [headerHeight]="70"
-          [footerHeight]="50" 
-          [rowHeight]="40" 
-          [limit]="5" 
-          [rows]='rows' 
-          [messages]="messages">
+        <ngx-datatable class='material' [columns]="columns" [columnMode]="'force'" [headerHeight]="70"
+          [footerHeight]="50" [rowHeight]="40" [limit]="5" [rows]='rows' [messages]="messages">
+
 
           <!-- nombre -->
           <ngx-datatable-column name="nombre">
             <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
-              <input type="search" class="form-control form-control-sm " placeholder="Buscar"
-                (keyup)="filtro($event, 'nombre')" (search)="limpiarCampo('nombre')">
-                <div class="header">
-                  <h6 class="title" (click)="sort()">Nombre</h6>
+              <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
+                (keyup)="filtro($event, 'nombre')"><br>
+              <div class="header" (click)="sort()">
+                <h6 class="title link">Nombre</h6>
               </div>
             </ng-template>
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              Hola: <strong>{{ value }}</strong>
-            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
           </ngx-datatable-column>
 
 
@@ -42,9 +33,9 @@
           <ngx-datatable-column name="email">
             <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
               <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="filtro($event, 'email')" (search)="limpiarCampo('email')">
-                <div class="header" >
-                  <h6 class="title" (click)="sort()">email</h6>
+                (keyup)="filtro($event, 'email')"><br>
+              <div class="header" (click)="sort()">
+                <h6 class="title link">e-Mail</h6>
               </div>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
@@ -54,23 +45,37 @@
           <!-- telefono -->
           <ngx-datatable-column name="telefono">
             <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
-              <input type="search" class="form-control form-control-sm" placeholder="Buscar..." 
-                (keyup)="filtro($event, 'telefono')"  >
-                <div class="header" >
-                  <h6 class="title" (click)="sort()">telefono</h6>
+              <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
+                (keyup)="filtro($event, 'telefono')"><br>
+              <div class="header" (click)="sort()">
+                <h6 class="title link">Teléfono</h6>
               </div>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
           </ngx-datatable-column>
 
+          <!-- foto -->
+          <!-- <ngx-datatable-column name="foto">
+            <ng-template ngx-datatable-cell-template let-value="value">
+              <div *ngIf="value">
+                <img [src]="fotoDir +'/'+ value" alt="Foto" class="rounded" height="25px">
+              </div>
+            </ng-template>
+          </ngx-datatable-column> -->
+
+
+
+
+
 
           <!-- editar / borrar-->
           <ngx-datatable-column [width]="50" [sortable]="false" [draggable]="false" [resizeable]="false">
             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-              <a href="javascript: void(0);" (click)="editRow(row)" class="link mr-2" placement="top" data-toggle="tooltip" title="Editar">
+              <a href="javascript: void(0);" (click)="editRow(row)" class="link mr-2" placement="top"
+                data-toggle="tooltip" title="Editar">
                 <i class='fas fa-edit fa-lg'></i>
               </a>
-              <a href="javascript: void(0);" (click)="editRow(row)" class="link mr-2" placement="top" data-toggle="tooltip" title="Borrar">
+              <a (click)="editRow(row)" class="link mr-2" placement="top" data-toggle="tooltip" title="Borrar">
                 <i class='fas fa-trash fa-lg'></i>
               </a>
             </ng-template>
@@ -83,25 +88,4 @@
     </div>
   </div>
 
-  <!-- 
-  <div *ngIf="usuarios.length" class="card">
-    <div class="card-body">
-
-      <div>
-        <ngx-datatable 
-          class="bootstrap" 
-          [rows]="rows" 
-          [loadingIndicator]="loadingIndicator" 
-          [columns]="columns"
-          [columnMode]="ColumnMode.force" 
-          [headerHeight]="40" 
-          [summaryRow]="true" 
-          [summaryPosition]="'bottom'"
-          [footerHeight]="40" 
-          [limit]="10" 
-          rowHeight="auto" >
-        </ngx-datatable>
-      </div>
-
-    </div>
-  </div> -->
+</div>
