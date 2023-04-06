@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsrConfigComponent implements OnInit {
   public linkTheme = document.querySelector('#theme');
+  menuExtendido: boolean = (localStorage.getItem('menuExtendido') === 'true');
 
   constructor(private configService: ConfigService) { }
 
@@ -17,6 +18,10 @@ export class UsrConfigComponent implements OnInit {
 
   cambiaColorTema(tema: string) {
     this.configService.cambiaColorTema(tema);
+  }
+
+  cambiaMenu() {
+    this.configService.menuExtendido(this.menuExtendido);
   }
 
 

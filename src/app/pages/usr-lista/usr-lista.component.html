@@ -13,14 +13,14 @@
         <h5 class="card-subtitle mt-6">Cabeceras tunning ngx-Datatable</h5> -->
 
         <ngx-datatable class='material' [columns]="columns" [columnMode]="'force'" [headerHeight]="70"
-          [footerHeight]="50" [rowHeight]="40" [limit]="5" [rows]='rows' [messages]="messages">
+          [footerHeight]="50" [rowHeight]="40" [limit]="20" [rows]='rows' [messages]="messages">
 
 
           <!-- nombre -->
           <ngx-datatable-column name="nombre">
             <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
               <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="filtro($event, 'nombre')"><br>
+                (keyup)="buscar($event, 'nombre')"><br>
               <div class="header" (click)="sort()">
                 <h6 class="title link">Nombre</h6>
               </div>
@@ -33,7 +33,7 @@
           <ngx-datatable-column name="email">
             <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
               <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="filtro($event, 'email')"><br>
+                (keyup)="buscar($event, 'email')"><br>
               <div class="header" (click)="sort()">
                 <h6 class="title link">e-Mail</h6>
               </div>
@@ -43,10 +43,10 @@
 
 
           <!-- telefono -->
-          <ngx-datatable-column name="telefono">
+          <ngx-datatable-column name="telefono" [width]="10">
             <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
               <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="filtro($event, 'telefono')"><br>
+                (keyup)="buscar($event, 'telefono')"><br>
               <div class="header" (click)="sort()">
                 <h6 class="title link">Teléfono</h6>
               </div>
@@ -65,6 +65,19 @@
 
 
 
+          <!-- rol -->
+          <ngx-datatable-column name="rol" [width]="1">
+            <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
+              <select class="form-control form-control-sm" (change)="buscaRol($event.target )">
+                <option value="">Todos</option>
+                <option *ngFor="let rol of roles" [value]="rol.valor">{{ rol.texto }}</option>
+              </select><br>
+              <div class="header" (click)="sort()">
+                <h6 class="title link">rol</h6>
+              </div>
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
+          </ngx-datatable-column>
 
 
 

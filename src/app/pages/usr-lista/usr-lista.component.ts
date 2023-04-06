@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 import { ColumnMode } from '@swimlane/ngx-datatable'
@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 export class UsrListaComponent implements OnInit {
 
   public fotoDir: string = environment.fotoDir;
+  public roles = [{ valor: 'sa', texto: 'SuperAdmin' }, { valor: 'usuario', texto: 'Usurio' }, { valor: 'admin', texto: 'Admin' }];
+
 
   messages = {
     emptyMessage: `<span class="text-danger">Sin datos...</span>`,
@@ -46,9 +48,7 @@ export class UsrListaComponent implements OnInit {
   }
 
 
-  filtro(event: any, campo: string) {
-    console.log(campo)
-    const val = event?.target?.value?.toLowerCase() ?? '';
+  filtro(val: string, campo: string) {
 
     // filter our data
     const temp = this.temp.filter(function (d) {
@@ -62,8 +62,6 @@ export class UsrListaComponent implements OnInit {
     this.table = this.usuarios;
   }
 
-
-
   limpiarCampo(campo: string) {
     // console.log(campo)
     // const evento = new Event('keyup');
@@ -75,6 +73,17 @@ export class UsrListaComponent implements OnInit {
     // Aquí puedes agregar la lógica para editar la fila
   }
 
+  buscar(event: any, campo: string) {
+    console.log(campo)
+    const txt = event?.target?.value?.toLowerCase() ?? '';
+    this.filtro(txt, campo);
+  }
+
+  buscaRol(evento: any) {
+    const txt: string = evento.value;
+    console.log(txt)
+    this.filtro(txt, 'rol');
+  }
 
 
 }

@@ -21,14 +21,16 @@ const inicializarCustomJs = () => {
         var set = function () {
             var width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
             var topOffset = 0;
+            
             // if (width < 1170) {
+            if (localStorage.getItem('menuExtendido') == 'true') {                
+                $("body").removeClass("mini-sidebar");
+                $('.navbar-brand span').show();
+            } else {
                 $("body").addClass("mini-sidebar");
                 $('.navbar-brand span').hide();
                 $(".sidebartoggler i").addClass("ti-menu");
-            // } else {
-            //     $("body").removeClass("mini-sidebar");
-            //     $('.navbar-brand span').show();
-            // }
+            }
 
             var height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
             height = height - topOffset;
@@ -168,5 +170,5 @@ const inicializarCustomJs = () => {
 // Cada vez que se cargue, se ejecutará esta instrucción, para inicializar los plugIn's y demás js del tema
 inicializarCustomJs();
 
- 
+
 

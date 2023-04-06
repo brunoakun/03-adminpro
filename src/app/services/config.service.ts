@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ConfigService {
   public linkTheme = document.querySelector('#theme');
+  public icoMenu = document.getElementsByClassName('ti-menu');
 
   constructor() {
     // Cargar el tema desde localStorage
@@ -35,6 +36,13 @@ export class ConfigService {
       const opcionUrl: string = `./assets/css/colors/${opcion}.css`;
       if (opcionUrl === this.linkTheme?.getAttribute('href')) elemento.classList.add('working');
     })
-
   }
-}
+
+
+  menuExtendido(extend: boolean) {
+    if (extend) localStorage.setItem('menuExtendido', 'true');
+    if (!extend) localStorage.removeItem('menuExtendido');
+  }
+
+} 
+

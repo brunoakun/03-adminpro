@@ -8,23 +8,33 @@
                 <form class="form p-t-20" [formGroup]="perfilForm" (ngSubmit)="enviar()">
 
                     <!-- nombre -->
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
+                    <div class="form-group" [ngClass]="{ 'has-danger': enviado && f['nombre'].errors }">
+                        <label class="form-control-label">Nombre</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
                             <input type="text" formControlName="nombre" class="form-control"
-                                placeholder="Nombre y apellidos">
+                                placeholder="Nombre y apellidos" trim="blur"
+                                [ngClass]="{ 'form-control-danger': enviado && f['nombre'].errors }">
+                        </div>
+                        <div *ngIf="enviado && f['nombre'].errors" class="form-control-feedback">
+                            <div *ngIf="f['nombre'].errors['required']">obligatorio</div>
+                            <div *ngIf="f['nombre'].errors['minlength']">Debe contener un mínimo de 4 caracteres</div>
+                            <div *ngIf="f['nombre'].errors['maxlength']">Nombre no puede exceder de 150 caracteres</div>
                         </div>
                     </div>
 
                     <!-- email -->
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input type="email" formControlName="email" class="form-control" id="email">
-                        </div>
+                    <div class="form-group" [ngClass]="{ 'has-danger': enviado && f['email'].errors }">
+                        <label class="form-control-label">Email</label>
+                        <input type="email" formControlName="email" class="form-control"
+                            [ngClass]="{ 'form-control-danger': enviado && f['email'].errors }">
+                       <div *ngIf="enviado && f['email'].errors" class="form-control-feedback">
+                        <div *ngIf="f['email'].errors['required']">obligatorio</div>
+                        <div *ngIf="f['email'].errors['eMailFormat']">No parece un eMail válido</div>
+                       </div>
                     </div>
+
+
 
                     <hr class="mt2">
                     <h6 class="card-subtitle">Opcional, modificar contraseña de acceso</h6>
@@ -32,25 +42,29 @@
                     <!-- password -->
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-lock"></i></div>
-                            <input type="password" class="form-control" formControlName="password"
-                                placeholder="Introduce la nueva contraseña">
-                        </div>
+                        <input type="password" class="form-control" formControlName="password"
+                            placeholder="Introduce la nueva contraseña"
+                            [ngClass]="{ 'is-invalid': enviado && f['password'].errors }">
                     </div>
+
 
                     <!-- password2 -->
-                    <div class="form-group">
-                        <label for="password2">Confirmar Password</label>
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-lock"></i></div>
-                            <input type="password" class="form-control" formControlName="password2">
+                    <div class="mb-3">
+                        <div class="form-group" [ngClass]="{ 'has-danger': enviado && f['password2'].errors }">
+                            <label class="form-control-label">password2</label>
+                            <input type="password" formControlName="password2" class="form-control"
+                                [ngClass]="{ 'form-control-danger': enviado && f['password2'].errors }">
+                            <div *ngIf="enviado && f['password2'].errors" class="form-control-feedback">
+                                <div *ngIf="f['password2'].errors['required']">password obligatorio</div>
+                                <div *ngIf="f['password2'].errors['matching']">Los passwords no coinciden</div>
+                            </div>
                         </div>
                     </div>
 
-                    <button type="submit" 
-                        [disabled]="perfilForm.invalid"
-                        class="btn waves-effect waves-light btn-rounded btn-success">Enviar</button>
+
+
+
+                    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Enviar</button>
 
                 </form>
             </div>
@@ -61,20 +75,16 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Avatar</h4>
-                <h6 class="card-subtitle">Imagen del usuario</h6>
-
-                <img src="">
+                <h6 class="card-subtitle">Imagen de usuario</h6>
+                <div class="text-center shadow">
+                    <img [src]="getUserFoto()" class="img-thumbnail img-avatar">
+                </div>
                 <br>
-                <input type="file">
+                <input type="file" (change)="subirFoto($event )">
                 <br>
                 <br>
-
-                <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10">Cambiar
-                    imagen</button>
             </div>
         </div>
     </div>
-
-
 
 </div>
