@@ -17,3 +17,9 @@
  .header {
      display: inline-block;
  }
+
+ .form-control-sm {
+     max-height: 25px;
+     background-color: rgb(234, 231, 231);
+     margin-bottom: 6px;
+ }

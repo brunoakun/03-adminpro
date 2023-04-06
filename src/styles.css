@@ -1,12 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'ngx-toastr/toastr';
 
+html {
+    zoom: 85%;
+}
+
 .pointer {
     cursor: pointer
 }
 
-html {
-    zoom: 85%;
+.w100 {
+    width: 100px;
 }
 
 /* Colores */

@@ -17,11 +17,13 @@ import { RouterModule } from '@angular/router';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { RolPipe } from './pipes/rol.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     Page404Component,
+    RolPipe,
   ],
   imports: [
     BrowserModule,
@@ -34,10 +36,12 @@ import { ToastrModule } from 'ngx-toastr';
 
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({
-      timeOut: 5000, 
+      timeOut: 5000,
       preventDuplicates: true,
       closeButton: true,
-    }), 
+      enableHtml: true
+    }),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

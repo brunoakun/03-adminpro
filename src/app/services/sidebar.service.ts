@@ -24,6 +24,14 @@ export class SidebarService {
       ]
     },
     {
+      titulo: 'Maestros',
+      icono: 'mdi mdi-table',
+      submenu: [
+        { titulo: 'Artículos', url: 'articulos_lista' },
+        { titulo: 'Stoks', url: 'sotcks_lista' },
+      ]
+    },
+    {
       titulo: 'Usuarios',
       icono: 'mdi mdi-account',
       submenu: [

@@ -1,8 +1,11 @@
+import { NotificacionesService } from './../../services/notificaciones.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 import { ColumnMode } from '@swimlane/ngx-datatable'
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2'; 
+
 
 @Component({
   selector: 'app-usr-lista',
@@ -13,7 +16,7 @@ export class UsrListaComponent implements OnInit {
 
   public fotoDir: string = environment.fotoDir;
   public roles = [{ valor: 'sa', texto: 'SuperAdmin' }, { valor: 'usuario', texto: 'Usurio' }, { valor: 'admin', texto: 'Admin' }];
-
+  loading: boolean = false;
 
   messages = {
     emptyMessage: `<span class="text-danger">Sin datos...</span>`,
@@ -25,17 +28,19 @@ export class UsrListaComponent implements OnInit {
   rows: any[] = [];
   temp: any[] = [];
 
-  loadingIndicator = true;
-  reorderable = true;
-
   columns = [];
   ColumnMode = ColumnMode;
 
   @ViewChild(UsrListaComponent) table: UsrListaComponent | any;
 
-  constructor(private usuarioService: UsuarioService) {
-    this.usuarioService.getLista()
+  constructor(
+    public usuarioSrv: UsuarioService,
+    private notificacionesSrv: NotificacionesService
+  ) {
+    this.loading = true;
+    this.usuarioSrv.getLista()
       .subscribe(respuesta => {
+        this.loading = false;
         this.usuarios = respuesta.data;
         console.log('usuarios', this.usuarios)
 
@@ -69,9 +74,35 @@ export class UsrListaComponent implements OnInit {
   }
 
   editRow(row: any) {
-    console.log('Editar fila:', row);
-    // Aquí puedes agregar la lógica para editar la fila
+    this.notificacionesSrv.aviso('info', `editar id ${row.id}`)
   }
+
+  deleteUsr(row: any) {
+    Swal.fire({
+      title: '¿Borrar usuario?',
+      icon: 'question',
+      html: `Eliminar <b>${row.username}</b><br><i>${row.rol}</i>`,
+      showCancelButton: true,
+      cancelButtonText:'Cancelar',
+      confirmButtonText: 'Si',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioSrv.deleteUsr(row.id)
+          .subscribe(resp => {
+            console.log('deleteUsr', resp);
+            if (resp.error) {
+              this.notificacionesSrv.aviso('error', resp.mensaje);
+            } else {
+              this.notificacionesSrv.aviso('info', `Registro eliminado`);
+              this.rows = this.rows.filter((objeto) => objeto.id !== row.id);
+            }
+          })
+      }
+    })
+
+
+  }
+
 
   buscar(event: any, campo: string) {
     console.log(campo)

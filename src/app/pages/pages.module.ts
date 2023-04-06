@@ -20,6 +20,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsrListaComponent } from './usr-lista/usr-lista.component';
 import { UsrPerfilComponent } from './usr-perfil/usr-perfil.component';
+import { ArticulosListaComponent } from './articulos/articulos-lista/articulos-lista.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UsrPerfilComponent } from './usr-perfil/usr-perfil.component';
     PromesasComponent,
     RxjsComponent,
     UsrListaComponent,
-    UsrPerfilComponent
+    UsrPerfilComponent,
+    ArticulosListaComponent
   ],
   exports: [
     PanelComponent,

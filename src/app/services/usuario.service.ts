@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegistroUsuario } from '../interfaces/registro-usuario';
 import { environment } from 'src/environments/environment';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, delay, map, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario';
 import { NotificacionesService } from './notificaciones.service';
@@ -111,12 +111,32 @@ export class UsuarioService {
   getLista() {
     // Devulve la lista de usuarios
     const path = `${this.apiURL}/usrList`;
-    return this.http.get<ApiResp>(path);
+    const lista = this.http.get<ApiResp>(path)
+      .pipe(
+        delay(10)
+      );
+    return lista;
   }
 
-  actualizaUsr(usuario: Usuario) {    
+  actualizaUsr(usuario: Usuario) {
     const path = `${this.apiURL}/userUpdate/${this.userdata.id}`;
     return this.http.post<ApiResp>(path, usuario);
+  }
+
+  deleteUsr(id: number) {
+    const token = localStorage.getItem('token') || '';
+    const cabeceras = new HttpHeaders().append(
+      'Authorization', 'Bearer ' + token
+    );
+
+    const path = `${this.apiURL}/userDelete/${id}`;
+    return this.http.get<ApiResp>(path, {headers: cabeceras})
+      .pipe(
+        catchError(error => {
+          this.notificacionesService.aviso('error', `El sistema ha devuelto un error. <br><i>Asegurate de estar autorizado para hacer esta operación</i>`);
+          return throwError(() => new Error(error));
+        })
+      )
   }
 
 }
