@@ -35,7 +35,7 @@ export class UsuarioService {
     );
     const body = {};
     const params = new HttpParams()
-      .append('email', formData.email)
+      .append('username', formData.username)
       .append('password', formData.password);
 
     return this.http.post<any>(`${this.apiURL}/login`, body, {
@@ -89,6 +89,7 @@ export class UsuarioService {
         }),
         map(resp => {
           // devolver true solo si la API no devuelve error
+          console.log('en el map de validarToken()', resp);
           return (!resp.error);
         })
       );
@@ -130,7 +131,7 @@ export class UsuarioService {
     );
 
     const path = `${this.apiURL}/userDelete/${id}`;
-    return this.http.get<ApiResp>(path, {headers: cabeceras})
+    return this.http.get<ApiResp>(path, { headers: cabeceras })
       .pipe(
         catchError(error => {
           this.notificacionesService.aviso('error', `El sistema ha devuelto un error. <br><i>Asegurate de estar autorizado para hacer esta operación</i>`);

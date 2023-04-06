@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 // Componentes
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { FriendlyTimestampPipe } from '../pipes/friendly-timestamp.pipe';
 
 
 
 @NgModule({
-  declarations: [
+  declarations: [    
     LoginComponent,
     RegisterComponent
   ],

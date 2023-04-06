@@ -4,6 +4,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 
 import { ColumnMode } from '@swimlane/ngx-datatable'
 import { environment } from 'src/environments/environment';
+
 import Swal from 'sweetalert2'; 
 
 
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './usr-lista.component.html',
   styleUrls: ['./usr-lista.component.css']
 })
-export class UsrListaComponent implements OnInit {
+export class UsrListaComponent implements OnInit {  
 
   public fotoDir: string = environment.fotoDir;
   public roles = [{ valor: 'sa', texto: 'SuperAdmin' }, { valor: 'usuario', texto: 'Usurio' }, { valor: 'admin', texto: 'Admin' }];

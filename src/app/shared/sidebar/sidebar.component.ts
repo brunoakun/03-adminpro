@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/services/sidebar.service';
 import { Route, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +13,7 @@ export class SidebarComponent implements OnInit {
   opcionesMenu: any[] = [];
   constructor(
     public srvMenu: SidebarService,
-    private usuarioService: UsuarioService,
+    public usuarioSrv: UsuarioService,
     private router: Router,
   ) { }
 
@@ -28,13 +29,7 @@ export class SidebarComponent implements OnInit {
 
 
   getUserFoto() {
-    return (this.usuarioService.getUserFoto());
+    return (this.usuarioSrv.getUserFoto());
   }
-
-  getUserData() {
-    // console.log(this.usuarioService.userdata);
-    return this.usuarioService.userdata;
-  }
-
 
 }

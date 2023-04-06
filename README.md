@@ -54,5 +54,10 @@ ng g guard guards/auth
 
 # Subida de imagen desde el Front-end hasta el Back-end
 
-## datatables 
+## ngx-datatables 
 npm install @swimlane/ngx-datatable --save
+
+## control de tiempos amigable
+npm install date-fns --save
+muestra cosas como "hace unos segundos" o "hace una hora". desde un timestap
+

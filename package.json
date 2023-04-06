@@ -22,6 +22,7 @@
     "@swimlane/ngx-datatable": "^20.1.0",
     "bootstrap": "^4.6.2",
     "chart.js": "^4.2.0",
+    "date-fns": "^2.29.3",
     "ng2-charts": "^4.1.1",
     "ngx-toastr": "^15.2.2",
     "rxjs": "~7.5.0",

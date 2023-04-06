@@ -9,19 +9,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class HeaderComponent {
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(public usuarioSrv: UsuarioService) { }
 
   logOut() {
-    this.usuarioService.logOut();
+    this.usuarioSrv.logOut();
   }
 
   getUserFoto() {
-    return (this.usuarioService.getUserFoto());
+    return (this.usuarioSrv.getUserFoto());
   }
-
-  getUserData() {
-    // console.log('getUserData()',this.usuarioService.userdata);
-    return this.usuarioService.userdata;
-  }
-
+ 
 }

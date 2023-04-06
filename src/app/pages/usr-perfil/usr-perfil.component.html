@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeIn fast">
 
     <div class="col-md-6">
         <div class="card">
@@ -15,7 +15,8 @@
                                 <label class="form-control-label">Usuario</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa-solid fa-user"></i></div>
-                                    <input type="text" formControlName="username" class="form-control" trim="blur"
+                                    <input [attr.disabled]="true" type="text" formControlName="username"
+                                        class="form-control" trim="blur"
                                         [ngClass]="{ 'form-control-danger': enviado && f['username'].errors }">
                                 </div>
                                 <div *ngIf="enviado && f['username'].errors" class="form-control-feedback">
@@ -105,7 +106,7 @@
                     </div>
 
 
-                    <hr>
+
 
                     <div class="card border border-warning rounded">
                         <div class="card-body passwordCard">

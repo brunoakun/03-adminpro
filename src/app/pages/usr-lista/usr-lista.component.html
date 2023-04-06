@@ -1,4 +1,4 @@
-<div *ngIf="loading" class="row animated fadeIn fast mt-4">
+<div *ngIf="loading" class="row mt-4">
   <div class="col-12">
     <div class="alert alert-info text-center" role="alert">
       <h4 class="alert-heading">Cargando...</h4>
@@ -9,7 +9,7 @@
 
 
 
-<div *ngIf="!loading" class="row fadeIn fast">
+<div *ngIf="!loading" class="row animated fadeIn fast">
 
   <div class="col-12">
     <div class="card">
@@ -103,17 +103,27 @@
             </ng-template>
           </ngx-datatable-column>
 
+          <!-- timestamp -->
+          <!-- <ngx-datatable-column name="timestamp" [width]="1">
+            <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
+              <br>
+              <div class="header" (click)="sort()">
+                <h6 class="title link">Conectado</h6>
+              </div>
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <span *ngIf="value">{{ value | friendlyTimestamp }}</span>
+            </ng-template>
+          </ngx-datatable-column> -->
 
 
-          <!-- editar / borrar-->
+
+          <!-- añadir / editar / borrar -->
           <ngx-datatable-column [width]="50" [sortable]="false" [draggable]="false" [resizeable]="false">
             <ng-template ngx-datatable-header-template>
-
-              <button type="button"
-                class="btn btn-sm waves-effect waves-light btn-rounded btn-outline-success">Añadir</button>
-
+              <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-outline-success"><i
+                  class="fa-solid fa-circle-plus"></i> Nuevo</button>
             </ng-template>
-
             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
               <a href="javascript: void(0);" (click)="editRow(row)" class="link mr-2" placement="top"
                 data-toggle="tooltip" title="Editar">
@@ -125,7 +135,6 @@
                   <i class="fa-regular fa-trash-can fa-lg"></i>
                 </a>
               </span>
-
             </ng-template>
           </ngx-datatable-column>
 

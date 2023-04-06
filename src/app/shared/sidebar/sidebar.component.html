@@ -10,7 +10,7 @@
                 <li class="user-profile">
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                         <img [src]="getUserFoto()" alt="usurio" />
-                        <span class="hide-menu">{{getUserData().nombre}} </span>
+                        <span class="hide-menu">{{usuarioSrv.userdata.nombre}} </span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a routerLink="./usr_perfil" routerLinkActive="active">Perfil de usuario</a></li>

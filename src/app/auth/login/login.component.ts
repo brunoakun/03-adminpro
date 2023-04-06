@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
+import { FriendlyTimestampPipe } from 'src/app/pipes/friendly-timestamp.pipe';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    public usuarioService: UsuarioService,
+    public usuarioSrv: UsuarioService,
     private notificacionesService: NotificacionesService
   ) { }
 
   public loginForm = this.fb.group({
-    email: [localStorage.getItem('loginEmail') || '', [Validators.required, Validators.email]],
+    username: [localStorage.getItem('username') || '', [Validators.required]],
     password: ['', Validators.required],
     remember: [localStorage.getItem('recordar') === 'true' || false]
   })
@@ -29,17 +30,21 @@ export class LoginComponent implements OnInit {
 
   enviar() {
     const frm = this.loginForm;
-    this.usuarioService.logIn(frm.value)
+    this.usuarioSrv.logIn(frm.value)
       .subscribe(respuesta => {
         if (respuesta.error) {
           this.notificacionesService.aviso('error', respuesta.mensaje);
         } else {
-          this.notificacionesService.aviso('info', `Bienvenido ${respuesta.data.userdata.nombre!}`);
+          let mensajePiped: string = '';
+          if (this.usuarioSrv.userdata.timestamp) {
+            mensajePiped = '<br>Tu última conexión fue hace ' + new FriendlyTimestampPipe().transform(this.usuarioSrv.userdata.timestamp!);
+          } 
+          this.notificacionesService.aviso('info', `Bienvenido ${respuesta.data.userdata.nombre!} ${mensajePiped}`);
           if (frm.get('remember')?.value) {
-            localStorage.setItem('loginEmail', frm.get('email')!.value!);
+            localStorage.setItem('username', frm.get('username')!.value!);
             localStorage.setItem('recordar', 'true');
           } else {
-            localStorage.removeItem('loginEmail');
+            localStorage.removeItem('username');
             localStorage.removeItem('recordar');
           }
           this.router.navigateByUrl('/');

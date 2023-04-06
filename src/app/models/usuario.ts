@@ -7,6 +7,7 @@ export class Usuario {
         public email?: string,
         public nombre?: string,
         public telefono?: string,
-        public foto?: string
+        public foto?: string,
+        public timestamp?: number
     ) { }
 }
