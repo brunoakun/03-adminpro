@@ -1,5 +1,5 @@
 import { NotificacionesService } from './../../services/notificaciones.service';
-import { UsuarioService } from './../../services/usuario.service';
+import { UsuarioService } from '../../services/datos/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -35,11 +35,9 @@ export class RegisterComponent implements OnInit {
   }
 
   crearUsuario() {
-    console.log(this.regiterForm.value);
     if (this.regiterForm.invalid) return
     this.usuarioService.crearUsuario(this.regiterForm.value)
       .subscribe(respuesta => {
-        console.log(respuesta);
         if (respuesta.error) {
           this.notificacionesService.aviso('error', respuesta.mensaje);
         } else {

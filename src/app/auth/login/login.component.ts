@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { UsuarioService } from 'src/app/services/datos/usuario.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { FriendlyTimestampPipe } from 'src/app/pipes/friendly-timestamp.pipe';
 

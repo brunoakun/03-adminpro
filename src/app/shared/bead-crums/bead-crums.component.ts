@@ -31,7 +31,6 @@ export class BreadcrumbsComponent implements OnDestroy {
 
 
   getArgumentosRuta() {
-
     return this.router.events
       .pipe(
         filter((event: any) => event instanceof ActivationEnd),

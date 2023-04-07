@@ -2,7 +2,7 @@ import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 import { ModalImagenService } from './../../services/modal-imagen.service';
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { UsuarioService } from 'src/app/services/datos/usuario.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -42,9 +42,6 @@ export class ModalImagenComponent implements OnInit {
 
   subirFoto(event: Event) {
     const usrModal = this.modalImagenSrv.usrModal;
-
-    console.log('subirFoto', usrModal);
-
     const inputElement = event.target as HTMLInputElement;
     const file: File | undefined = inputElement.files?.[0] || undefined;
 
@@ -82,7 +79,6 @@ export class ModalImagenComponent implements OnInit {
     const usrModal = this.modalImagenSrv.usrModal
     this.usuarioSrv.deleteUsrFoto(usrModal)
       .subscribe(resp => {
-        console.log(resp);
         if (!resp.error) {
           usrModal.foto = '_noUsr.png';
 

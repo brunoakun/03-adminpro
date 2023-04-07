@@ -1,10 +1,17 @@
+// Componentes
 import { UploadFileService } from './../../services/upload-file.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import CustomVal from '../../providers/CustomValidators';
 
-import { UsuarioService } from 'src/app/services/usuario.service';
+// Servicios
+import { UsuarioService } from 'src/app/services/datos/usuario.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
+import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+
+// Customs y terceros
+import CustomVal from '../../providers/CustomValidators';
+import { Usuario } from 'src/app/models/usuario';
+
 @Component({
   selector: 'app-usr-perfil',
   templateUrl: './usr-perfil.component.html',
@@ -20,8 +27,8 @@ export class UsrPerfilComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public usuarioSrv: UsuarioService,
-    private uploadFileSrv: UploadFileService,
-    private notificacionesService: NotificacionesService
+    private notificacionesService: NotificacionesService,
+    public modalImagenSrv: ModalImagenService
   ) { }
 
   ngOnInit(): void {
@@ -62,9 +69,7 @@ export class UsrPerfilComponent implements OnInit {
       .subscribe(resp => {
         this.loading = false;
         if (resp.error) {
-          console.log(resp)
           this.notificacionesService.aviso('error', resp.mensaje);
-          // this.setApiErrors(resp.mensaje)
           for (let controlName in resp.mensaje) {
             this.perfilForm.get(controlName)!.setErrors({ 'apiError': resp.mensaje[controlName] });
           }
@@ -75,30 +80,9 @@ export class UsrPerfilComponent implements OnInit {
       })
   }
 
-  private setApiErrors(errors: { [key: string]: string }): void {
-    const controls = this.perfilForm.controls;
-    Object.keys(errors).forEach(key => {
-      const control = controls[key];
-      if (control) {
-        control.setErrors({ serverError: errors[key] });
-      }
-    });
-  }
-
-  subirFoto(event: Event) {
-    let userdata = this.usuarioSrv.userdata;
-
-    const inputElement = event.target as HTMLInputElement;
-    const file: File | undefined = inputElement.files?.[0] || undefined;
-
-    if (file) this.uploadFileSrv.uploadFoto(file, userdata.id!.toString())
-      .then(resp => {
-        if (!resp.error) {
-          userdata.foto = resp.data.guardado_como;
-        } else {
-          this.notificacionesService.aviso('error', resp.mensaje);
-        }
-      });
+  subirFoto() {
+    this.modalImagenSrv.usrModal = this.usuarioSrv.userdata;
+    this.modalImagenSrv.abrirModal();
   }
 
   getUserFoto() {

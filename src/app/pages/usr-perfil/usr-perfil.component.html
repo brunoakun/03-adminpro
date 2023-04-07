@@ -1,88 +1,110 @@
 <div class="row animated fadeIn fast">
 
-    <div class="col-md-6">
+    <div class="col-md-8 ">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Perfil de usuario</h4>
                 <h6 class="card-subtitle">Modificar tus datos de usuario</h6>
+
                 <form class="form p-t-20"
                       [formGroup]="perfilForm"
                       (ngSubmit)="enviar()">
 
                     <div class="row">
 
-                        <!-- username -->
-                        <div class="col-md-6">
-                            <div class="form-group"
-                                 [ngClass]="{ 'has-danger': enviado && f['username'].errors }">
-                                <label class="form-control-label">Usuario</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa-solid fa-user"></i></div>
-                                    <input [attr.disabled]="true"
-                                           type="text"
-                                           formControlName="username"
-                                           class="form-control"
-                                           trim="blur"
-                                           [ngClass]="{ 'form-control-danger': enviado && f['username'].errors }">
-                                </div>
-                                <div *ngIf="enviado && f['username'].errors"
-                                     class="form-control-feedback">
-                                    <div *ngIf="f['username'].errors['required']">Obligatorio</div>
-                                    <div *ngIf="f['username'].errors['minlength']">Debe contener un mínimo de 4
-                                        caracteres
+                        <div class="col-md-8">
+                            <div class="row">
+
+                                <!-- username -->
+                                <div class="col-md-6">
+                                    <div class="form-group"
+                                         [ngClass]="{ 'has-danger': enviado && f['username'].errors }">
+                                        <label class="form-control-label">Usuario</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa-solid fa-user"></i></div>
+                                            <input [attr.disabled]="true"
+                                                   type="text"
+                                                   formControlName="username"
+                                                   class="form-control"
+                                                   trim="blur"
+                                                   [ngClass]="{ 'form-control-danger': enviado && f['username'].errors }">
+                                        </div>
+                                        <div *ngIf="enviado && f['username'].errors"
+                                             class="form-control-feedback">
+                                            <div *ngIf="f['username'].errors['required']">Obligatorio</div>
+                                            <div *ngIf="f['username'].errors['minlength']">Debe contener un mínimo de 4 caracteres</div>
+                                            <div *ngIf="f['username'].errors['maxlength']">Nombre no puede exceder de 150 caracteres</div>
+                                        </div>
                                     </div>
-                                    <div *ngIf="f['username'].errors['maxlength']">Nombre no puede exceder de 150
-                                        caracteres
+                                </div>
+
+                                <!-- rol -->
+                                <div class="col-md-6">
+                                    <div class="form-group"
+                                         [ngClass]="{ 'has-danger': enviado && f['rol'].errors }">
+                                        <label class="form-control-label">Rol</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa-solid fa-list-check"></i></div>
+
+                                            <select [attr.disabled]="usuarioSrv.userdata.rol == 'user'"
+                                                    formControlName="rol"
+                                                    class="form-control"
+                                                    [ngClass]="{ 'form-control-danger': enviado && f['nombre'].errors }">
+                                                <option>admin</option>
+                                                <option>usuario</option>
+                                                <option>sa</option>
+                                            </select>
+                                        </div>
+                                        <div *ngIf="enviado && f['rol'].errors"
+                                             class="form-control-feedback">
+                                            <div *ngIf="f['rol'].errors['required']">Obligatorio</div>
+                                            <div *ngIf="perfilForm.get('rol')?.errors?.['apiError']">{{
+                                                perfilForm.get('rol')?.errors?.['apiError'] }}</div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <!-- nombre -->
+                                <div class="col-md-12">
+                                    <div class="form-group"
+                                         [ngClass]="{ 'has-danger': enviado && f['nombre'].errors }">
+                                        <label class="form-control-label">Nombre y apellidos</label>
+                                        <input type="text"
+                                               formControlName="nombre"
+                                               class="form-control"
+                                               [ngClass]="{ 'form-control-danger': enviado && f['nombre'].errors }"
+                                               placeholder="Nombre completo">
+                                        <div *ngIf="enviado && f['nombre'].errors"
+                                             class="form-control-feedback">
+                                            <div *ngIf="f['nombre'].errors['required']">Obligatorio</div>
+                                            <div *ngIf="f['nombre'].errors['minlength']">Debe contener un mínimo de 4 caracteres</div>
+                                            <div *ngIf="f['nombre'].errors['maxlength']">Nombre no puede exceder de 150 caracteres</div>
+                                            <div *ngIf="perfilForm.get('nombre')?.errors?.['apiError']">{{perfilForm.get('nombre')?.errors?.['apiError'] }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-control-label ml-4">Modificar foto</label>
+
+                            <div class="text-center shadow mt4">
+                                <img [src]="getUserFoto()"
+                                     (click)="subirFoto()"
+                                     title="Cambiar ó borrar foto"
+                                     class="img-thumbnail img-avatar pointer">
                             </div>
                         </div>
 
-                        <!-- rol -->
-                        <div class="col-md-6">
-                            <div class="form-group"
-                                 [ngClass]="{ 'has-danger': enviado && f['rol'].errors }">
-                                <label class="form-control-label">Rol</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa-solid fa-list-check"></i></div>
+                    </div>
 
-                                    <select [attr.disabled]="usuarioSrv.userdata.rol == 'user'"
-                                            formControlName="rol"
-                                            class="form-control"
-                                            [ngClass]="{ 'form-control-danger': enviado && f['nombre'].errors }">
-                                        <option>admin</option>
-                                        <option>usuario</option>
-                                        <option>sa</option>
-                                    </select>
-                                </div>
-                                <div *ngIf="enviado && f['rol'].errors"
-                                     class="form-control-feedback">
-                                    <div *ngIf="f['rol'].errors['required']">Obligatorio</div>
-                                    <div *ngIf="perfilForm.get('rol')?.errors?.['apiError']">{{
-                                        perfilForm.get('rol')?.errors?.['apiError'] }}</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row">
 
 
-                        <!-- nombre -->
-                        <div class="col-md-12">
-                            <div class="form-group"
-                                 [ngClass]="{ 'has-danger': enviado && f['nombre'].errors }">
-                                <label class="form-control-label">Nombre y apellidos</label>
-                                <input type="text"
-                                       formControlName="nombre"
-                                       class="form-control"
-                                       [ngClass]="{ 'form-control-danger': enviado && f['nombre'].errors }"
-                                       placeholder="Nombre completo">
-                                <div *ngIf="enviado && f['nombre'].errors"
-                                     class="form-control-feedback">
-                                    <div *ngIf="f['nombre'].errors['required']">Obligatorio</div>
-                                    <div *ngIf="perfilForm.get('nombre')?.errors?.['apiError']">{{
-                                        perfilForm.get('nombre')?.errors?.['apiError'] }}</div>
-                                </div>
-                            </div>
-                        </div>
 
 
 
@@ -99,8 +121,7 @@
                                      class="form-control-feedback">
                                     <div *ngIf="f['email'].errors['required']">Obligatorio</div>
                                     <div *ngIf="f['email'].errors['eMailFormat']">No parece un eMail válido</div>
-                                    <div *ngIf="perfilForm.get('email')?.errors?.['apiError']">{{
-                                        perfilForm.get('email')?.errors?.['apiError'] }}</div>
+                                    <div *ngIf="perfilForm.get('email')?.errors?.['apiError']">{{perfilForm.get('email')?.errors?.['apiError'] }}</div>
                                 </div>
                             </div>
                         </div>
@@ -118,8 +139,7 @@
                                 <div *ngIf="enviado && f['telefono'].errors"
                                      class="form-control-feedback">
                                     <div *ngIf="f['telefono'].errors['required']">Obligatorio</div>
-                                    <div *ngIf="perfilForm.get('telefono')?.errors?.['apiError']">{{
-                                        perfilForm.get('telefono')?.errors?.['apiError'] }}</div>
+                                    <div *ngIf="perfilForm.get('telefono')?.errors?.['apiError']">{{perfilForm.get('telefono')?.errors?.['apiError'] }}</div>
                                 </div>
                             </div>
                         </div>
@@ -148,8 +168,7 @@
                                         <div *ngIf="enviado && f['password'].errors"
                                              class="form-control-feedback">
                                             <div *ngIf="f['password'].errors['required']">Obligatorio</div>
-                                            <div *ngIf="perfilForm.get('password')?.errors?.['apiError']">{{
-                                                perfilForm.get('password')?.errors?.['apiError'] }}</div>
+                                            <div *ngIf="perfilForm.get('password')?.errors?.['apiError']">{{perfilForm.get('password')?.errors?.['apiError'] }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -166,9 +185,8 @@
                                                [ngClass]="{ 'form-control-danger': enviado && f['password2'].errors }">
                                         <div *ngIf="enviado && f['password2'].errors"
                                              class="form-control-feedback">
-                                            <div *ngIf="f['password2'].errors['required']">password obligatorio</div>
-                                            <div *ngIf="f['password2'].errors['matching']">Los passwords no coinciden
-                                            </div>
+                                            <div *ngIf="f['password2'].errors['required']">Password obligatorio</div>
+                                            <div *ngIf="f['password2'].errors['matching']">Los passwords no coinciden</div>
                                         </div>
                                     </div>
                                 </div>
@@ -177,32 +195,14 @@
                         </div>
                     </div>
 
-                    <button [disabled]="loading"
-                            type="submit"
-                            class="btn waves-effect waves-light btn-rounded btn-success"> <i class="fa fa-spinner fa-spin"
-                           *ngIf="loading"></i> Enviar</button>
-
-
+                    <div class="text-center d-flex">
+                        <button [disabled]="loading"
+                                type="submit"
+                                class="ml-auto btn waves-effect waves-light btn-rounded btn-success"> <i class="fa fa-spinner fa-spin"
+                               *ngIf="loading"></i> Enviar</button>
+                    </div>
 
                 </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Avatar</h4>
-                <h6 class="card-subtitle">Imagen de usuario</h6>
-                <div class="text-center shadow">
-                    <img [src]="getUserFoto()"
-                         class="img-thumbnail img-avatar">
-                </div>
-                <br>
-                <input type="file"
-                       (change)="subirFoto($event )">
-                <br>
-                <br>
             </div>
         </div>
     </div>

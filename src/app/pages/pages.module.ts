@@ -44,7 +44,8 @@ import { ArticulosListaComponent } from './articulos/articulos-lista/articulos-l
     PromesasComponent,
     RxjsComponent,
     UsrListaComponent,
-    UsrPerfilComponent
+    UsrPerfilComponent,
+    ArticulosListaComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,8 @@
- import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { NotificacionesService } from './notificaciones.service'; 
-
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +11,7 @@ export class UploadFileService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private notificacionesService: NotificacionesService
+    private router: Router, 
   ) { }
 
   async uploadFoto(archivo: File, id: string) {
@@ -29,13 +27,10 @@ export class UploadFileService {
         body: formData
       });
 
-      console.log('resp', resp);
-
       const respAwa = await resp.json();
-      console.log(respAwa);
-        return respAwa;
+      return respAwa;
+
     } catch (error) {
-      console.log(error);
       return (false);
     }
   }

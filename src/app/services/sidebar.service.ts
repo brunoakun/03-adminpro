@@ -27,15 +27,23 @@ export class SidebarService {
       titulo: 'Maestros',
       icono: 'mdi mdi-table',
       submenu: [
+        { titulo: 'Clientes', url: 'clientes_lista' },
         { titulo: 'Artículos', url: 'articulos_lista' },
         { titulo: 'Stoks', url: 'sotcks_lista' },
       ]
     },
     {
-      titulo: 'Usuarios',
-      icono: 'mdi mdi-account',
+      titulo: 'Gestión',
+      icono: 'fa-solid fa-boxes-stacked',
       submenu: [
-        { titulo: 'Listado', url: 'usr_lista' },
+        { titulo: 'Transcacciones', url: 'transac_lista' },
+      ]
+    },
+    {
+      titulo: 'Utilidades',
+      icono: 'fa-solid fa-gears',
+      submenu: [
+        { titulo: 'Usuarios', url: 'usr_lista' },
       ]
     }
   ]

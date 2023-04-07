@@ -1,7 +1,7 @@
 import { ModalImagenService } from './../../services/modal-imagen.service';
 import { NotificacionesService } from './../../services/notificaciones.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { UsuarioService } from 'src/app/services/datos/usuario.service';
 
 import { ColumnMode } from '@swimlane/ngx-datatable'
 import { environment } from 'src/environments/environment';
@@ -45,8 +45,6 @@ export class UsrListaComponent implements OnInit {
       .subscribe(respuesta => {
         this.loading = false;
         this.usuarios = respuesta.data;
-        console.log('usuarios', this.usuarios)
-
         this.rows = this.usuarios;
         this.temp = [...this.usuarios];
       })
@@ -92,7 +90,6 @@ export class UsrListaComponent implements OnInit {
       if (result.isConfirmed) {
         this.usuarioSrv.deleteUsr(row.id)
           .subscribe(resp => {
-            console.log('deleteUsr', resp);
             if (resp.error) {
               this.notificacionesSrv.aviso('error', resp.mensaje);
             } else {
@@ -108,19 +105,16 @@ export class UsrListaComponent implements OnInit {
 
 
   buscar(event: any, campo: string) {
-    console.log(campo)
     const txt = event?.target?.value?.toLowerCase() ?? '';
     this.filtro(txt, campo);
   }
 
   buscaRol(evento: any) {
     const txt: string = evento.value;
-    console.log(txt)
     this.filtro(txt, 'rol');
   }
 
   abrirModal(row: Usuario) {
-    console.log('abrirModal', row)
     this.modalImagenSrv.usrModal = row;
     this.modalImagenSrv.abrirModal();
   }

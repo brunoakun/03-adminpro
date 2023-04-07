@@ -1,16 +1,18 @@
-import { ApiResp } from './../interfaces/api-resp';
+import { ModalImagenService } from '../modal-imagen.service';
+import { ApiResp } from '../../interfaces/api-resp';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegistroUsuario } from '../interfaces/registro-usuario';
+import { RegistroUsuario } from '../../interfaces/registro-usuario';
 import { environment } from 'src/environments/environment';
 import { Observable, catchError, delay, map, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { Usuario } from '../models/usuario';
-import { NotificacionesService } from './notificaciones.service';
+import { Usuario } from '../../models/usuario';
+import { NotificacionesService } from '../notificaciones.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UsuarioService {
 
   apiURL: string = environment.apiURL;
@@ -19,15 +21,11 @@ export class UsuarioService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private notificacionesService: NotificacionesService
+    private notificacionesSrv: NotificacionesService,
+    private modalImagenSrv: ModalImagenService
   ) { }
 
-
-  crearUsuario(formData: RegistroUsuario) {
-    const path = `${this.apiURL}/register`;
-    return this.http.post<ApiResp>(path, formData);
-  }
-
+  ////////// AUTH  /////////
 
   logIn(formData: any) {
     const headers = new HttpHeaders().append(
@@ -45,7 +43,7 @@ export class UsuarioService {
       .pipe(
         catchError(error => {
           console.log('Error al intentar autenticar:', error);
-          this.notificacionesService.aviso('error', 'Error al intentar autenticar, el servidor no está respondiendo. Por favor, intenta de nuevo más tarde.');
+          this.notificacionesSrv.aviso('error', 'Error al intentar autenticar, el servidor no está respondiendo. Por favor, intenta de nuevo más tarde.');
           return throwError(() => new Error(error));
         }),
         tap(resp => {
@@ -77,7 +75,8 @@ export class UsuarioService {
       .pipe(
         catchError(error => {
           console.log('Error al intentar acceder al srvidor:', error);
-          this.notificacionesService.aviso('error', `El servidor ${this.apiURL} no está respondiendo. Por favor, intenta de nuevo más tarde.`);
+          this.notificacionesSrv.aviso('error', `El servidor ${this.apiURL} no está respondiendo. Por favor, intenta de nuevo más tarde.`);
+          this.logOut();
           return throwError(() => new Error(error));
         }),
         tap(resp => {
@@ -89,16 +88,23 @@ export class UsuarioService {
         }),
         map(resp => {
           // devolver true solo si la API no devuelve error
-          console.log('en el map de validarToken()', resp);
           return (!resp.error);
         })
       );
   }
 
+  crearUsuario(formData: RegistroUsuario) {
+    const path = `${this.apiURL}/register`;
+    return this.http.post<ApiResp>(path, formData);
+  }
 
-  // Datos del usuario
+
+  //////  CRUD  ///////
+
+
 
   getUserFoto() {
+    // Devuleve la foto del usuario
     var foto = this.userdata.foto;
     if (foto) {
       foto = `${environment.fotoDir}/${foto}`;
@@ -114,27 +120,34 @@ export class UsuarioService {
     const path = `${this.apiURL}/usrList`;
     const lista = this.http.get<ApiResp>(path)
       .pipe(
-        delay(10)
+        // delay(10)
       );
     return lista;
   }
 
   actualizaUsr(usuario: Usuario) {
+    const token = localStorage.getItem('token') || '';
+    const cabeceras = new HttpHeaders().append('Authorization', 'Bearer ' + token);
+
     const path = `${this.apiURL}/userUpdate/${this.userdata.id}`;
-    return this.http.post<ApiResp>(path, usuario);
+    return this.http.post<ApiResp>(path, usuario, { headers: cabeceras })
+      .pipe(
+        catchError(error => {
+          this.errorAuth();
+          return throwError(() => new Error(error));
+        })
+      )
   }
 
   deleteUsr(id: number) {
     const token = localStorage.getItem('token') || '';
-    const cabeceras = new HttpHeaders().append(
-      'Authorization', 'Bearer ' + token
-    );
+    const cabeceras = new HttpHeaders().append('Authorization', 'Bearer ' + token);
 
     const path = `${this.apiURL}/userDelete/${id}`;
     return this.http.get<ApiResp>(path, { headers: cabeceras })
       .pipe(
         catchError(error => {
-          this.notificacionesService.aviso('error', environment.apiErrorAuth);
+          this.errorAuth();
           return throwError(() => new Error(error));
         })
       )
@@ -143,18 +156,25 @@ export class UsuarioService {
 
   deleteUsrFoto(usuario: Usuario) {
     const token = localStorage.getItem('token') || '';
-    const cabeceras = new HttpHeaders().append(
-      'Authorization', 'Bearer ' + token
-    );
+    const cabeceras = new HttpHeaders().append('Authorization', 'Bearer ' + token);
 
     const path = `${this.apiURL}/userDeleteFoto/${usuario.id}`;
     return this.http.get<ApiResp>(path, { headers: cabeceras })
       .pipe(
         catchError(error => {
-          this.notificacionesService.aviso('error', environment.apiErrorAuth);
+          this.errorAuth();
           return throwError(() => new Error(error));
         })
       )
+  }
+
+
+  ///// AUX ////
+
+  errorAuth() {
+    this.logOut();
+    this.modalImagenSrv.cerrarModal();
+    this.notificacionesSrv.aviso('error', environment.apiErrorAuth);
   }
 
 }
