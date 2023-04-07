@@ -1,0 +1,62 @@
+<div [class.oculto]="modalImagenSrv.ocultarModal"
+     class="fondo-modal-imagen ">
+
+    <div class="modal fade show"
+         id="exampleModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="exampleModalLabel1"
+         style="display: block;"
+         (click)="cerrarModalClickOutside($event)">
+        <div class="modal-dialog"
+             role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"
+                        id="exampleModalLabel1">Cargar imágen</h4>
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
+                        <span (click)="cerrarModal()"
+                              aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3>Selecciona imágen</h3>
+                    <div class="text-center shadow">
+                        <span *ngIf="loading">
+                            <i class="fa fa-spin fa-refresh fa-2x mr-1"> </i><br>
+                            Subiendo...
+                        </span>
+                        <img *ngIf="!loading"
+                             [src]="getFoto()"
+                             class="img-thumbnail img-usr">
+                    </div>
+
+                    <div class="mt-1">
+                        <input type="file"
+                               [disabled]="loading"
+                               (change)="subirFoto($event )">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button (click)="cerrarModal()"
+                            [disabled]="loading"
+                            class="btn btn-default"
+                            data-dismiss="modal">Cancelar</button>
+                    <button type="button"
+                            *ngIf="this.modalImagenSrv.usrModal.foto !='_noUsr.png'"
+                            [disabled]="loading"
+                            (click)="borrarFoto()"
+                            class="btn btn-danger">Borrar foto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

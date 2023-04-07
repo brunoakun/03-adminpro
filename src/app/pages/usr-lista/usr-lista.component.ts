@@ -1,3 +1,4 @@
+import { ModalImagenService } from './../../services/modal-imagen.service';
 import { NotificacionesService } from './../../services/notificaciones.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -5,15 +6,15 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { ColumnMode } from '@swimlane/ngx-datatable'
 import { environment } from 'src/environments/environment';
 
-import Swal from 'sweetalert2'; 
-
+import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-usr-lista',
   templateUrl: './usr-lista.component.html',
   styleUrls: ['./usr-lista.component.css']
 })
-export class UsrListaComponent implements OnInit {  
+export class UsrListaComponent implements OnInit {
 
   public fotoDir: string = environment.fotoDir;
   public roles = [{ valor: 'sa', texto: 'SuperAdmin' }, { valor: 'usuario', texto: 'Usurio' }, { valor: 'admin', texto: 'Admin' }];
@@ -36,7 +37,8 @@ export class UsrListaComponent implements OnInit {
 
   constructor(
     public usuarioSrv: UsuarioService,
-    private notificacionesSrv: NotificacionesService
+    private notificacionesSrv: NotificacionesService,
+    private modalImagenSrv: ModalImagenService
   ) {
     this.loading = true;
     this.usuarioSrv.getLista()
@@ -84,7 +86,7 @@ export class UsrListaComponent implements OnInit {
       icon: 'question',
       html: `Eliminar <b>${row.username}</b><br><i>${row.rol}</i>`,
       showCancelButton: true,
-      cancelButtonText:'Cancelar',
+      cancelButtonText: 'Cancelar',
       confirmButtonText: 'Si',
     }).then((result) => {
       if (result.isConfirmed) {
@@ -117,5 +119,10 @@ export class UsrListaComponent implements OnInit {
     this.filtro(txt, 'rol');
   }
 
+  abrirModal(row: Usuario) {
+    console.log('abrirModal', row)
+    this.modalImagenSrv.usrModal = row;
+    this.modalImagenSrv.abrirModal();
+  }
 
 }

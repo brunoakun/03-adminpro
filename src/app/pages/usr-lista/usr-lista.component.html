@@ -1,6 +1,8 @@
-<div *ngIf="loading" class="row mt-4">
+<div *ngIf="loading"
+     class="row mt-4">
   <div class="col-12">
-    <div class="alert alert-info text-center" role="alert">
+    <div class="alert alert-info text-center"
+         role="alert">
       <h4 class="alert-heading">Cargando...</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
     </div>
@@ -9,7 +11,8 @@
 
 
 
-<div *ngIf="!loading" class="row animated fadeIn fast">
+<div *ngIf="!loading"
+     class="row animated fadeIn fast">
 
   <div class="col-12">
     <div class="card">
@@ -17,16 +20,31 @@
         <!-- <h4 class="card-title">Filter Option</h4>
         <h5 class="card-subtitle mt-6">Cabeceras tunning ngx-Datatable</h5> -->
 
-        <ngx-datatable class='material' [columns]="columns" [columnMode]="'force'" [headerHeight]="70"
-          [footerHeight]="50" [rowHeight]="40" [limit]="10" [rows]='rows' [messages]="messages">
-
+        <ngx-datatable class='material'
+                       [columns]="columns"
+                       [columnMode]="'force'"
+                       [headerHeight]="70"
+                       [footerHeight]="50"
+                       [rowHeight]="40"
+                       [limit]="10"
+                       [rows]='rows'
+                       [messages]="messages">
 
 
           <!-- foto -->
-          <ngx-datatable-column name="" prop="foto" [width]="1" [sortable]="false">
-            <ng-template ngx-datatable-cell-template let-value="value">
+          <ngx-datatable-column name=""
+                                prop="foto"
+                                [width]="1"
+                                [sortable]="false">
+            <ng-template ngx-datatable-cell-template
+                         let-row="row"
+                         let-value="value">
               <div *ngIf="value">
-                <img [src]="fotoDir +'/'+ value" alt="Foto" class="rounded" height="25px">
+                <img [src]="fotoDir +'/'+ value"
+                     (click)="abrirModal(row)"
+                     alt="Foto"
+                     class="rounded pointer"
+                     height="25px">
               </div>
             </ng-template>
           </ngx-datatable-column>
@@ -34,71 +52,104 @@
 
           <!-- username -->
           <ngx-datatable-column name="username">
-            <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
-              <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="buscar($event, 'username')"><br>
-              <div class="header" (click)="sort()">
+            <ng-template ngx-datatable-header-template
+                         let-sort="sortFn"
+                         let-column="column">
+              <input type="search"
+                     class="form-control form-control-sm"
+                     placeholder="Buscar..."
+                     (keyup)="buscar($event, 'username')"><br>
+              <div class="header"
+                   (click)="sort()">
                 <h6 class="title link">Usuario</h6>
               </div>
             </ng-template>
-            <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
+            <ng-template let-value="value"
+                         ngx-datatable-cell-template>{{ value }}</ng-template>
           </ngx-datatable-column>
 
 
           <!-- nombre -->
           <ngx-datatable-column name="nombre">
-            <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
-              <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="buscar($event, 'nombre')"><br>
-              <div class="header" (click)="sort()">
+            <ng-template ngx-datatable-header-template
+                         let-sort="sortFn"
+                         let-column="column">
+              <input type="search"
+                     class="form-control form-control-sm"
+                     placeholder="Buscar..."
+                     (keyup)="buscar($event, 'nombre')"><br>
+              <div class="header"
+                   (click)="sort()">
                 <h6 class="title link">Nombre</h6>
               </div>
             </ng-template>
-            <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
+            <ng-template let-value="value"
+                         ngx-datatable-cell-template>{{ value }}</ng-template>
           </ngx-datatable-column>
 
 
           <!-- email -->
           <ngx-datatable-column name="email">
-            <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
-              <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="buscar($event, 'email')"><br>
-              <div class="header" (click)="sort()">
+            <ng-template ngx-datatable-header-template
+                         let-sort="sortFn"
+                         let-column="column">
+              <input type="search"
+                     class="form-control form-control-sm"
+                     placeholder="Buscar..."
+                     (keyup)="buscar($event, 'email')"><br>
+              <div class="header"
+                   (click)="sort()">
                 <h6 class="title link">e-Mail</h6>
               </div>
             </ng-template>
-            <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
+            <ng-template let-value="value"
+                         ngx-datatable-cell-template>{{ value }}</ng-template>
           </ngx-datatable-column>
 
 
           <!-- telefono -->
-          <ngx-datatable-column name="telefono" [width]="10">
-            <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
-              <input type="search" class="form-control form-control-sm" placeholder="Buscar..."
-                (keyup)="buscar($event, 'telefono')"><br>
-              <div class="header" (click)="sort()">
+          <ngx-datatable-column name="telefono"
+                                [width]="10">
+            <ng-template ngx-datatable-header-template
+                         let-sort="sortFn"
+                         let-column="column">
+              <input type="search"
+                     class="form-control form-control-sm"
+                     placeholder="Buscar..."
+                     (keyup)="buscar($event, 'telefono')"><br>
+              <div class="header"
+                   (click)="sort()">
                 <h6 class="title link">Teléfono</h6>
               </div>
             </ng-template>
-            <ng-template let-value="value" ngx-datatable-cell-template>{{ value }}</ng-template>
+            <ng-template let-value="value"
+                         ngx-datatable-cell-template>{{ value }}</ng-template>
           </ngx-datatable-column>
 
 
 
 
           <!-- rol -->
-          <ngx-datatable-column name="rol" [width]="1">
-            <ng-template ngx-datatable-header-template let-sort="sortFn" let-column="column">
-              <select class="form-control form-control-sm" (change)="buscaRol($event.target )">
+          <ngx-datatable-column name="rol"
+                                [width]="1">
+            <ng-template ngx-datatable-header-template
+                         let-sort="sortFn"
+                         let-column="column">
+              <select class="form-control form-control-sm"
+                      (change)="buscaRol($event.target )">
                 <option value="">Todos</option>
-                <option *ngFor="let rol of roles" [value]="rol.valor">{{ rol.texto }}</option>
+                <option *ngFor="let rol of roles"
+                        [value]="rol.valor">{{ rol.texto }}</option>
               </select><br>
-              <div class="header" (click)="sort()">
+              <div class="header"
+                   (click)="sort()">
                 <h6 class="title link">rol</h6>
               </div>
             </ng-template>
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              <span *ngIf="value === 'admin'" class="badge badge-pill badge-warning">Admin</span>
+            <ng-template let-value="value"
+                         ngx-datatable-cell-template>
+              <span *ngIf="value === 'admin'"
+                    class="badge badge-pill badge-warning">Admin</span>
               <span *ngIf="value != 'admin'">{{value | titlecase }}</span>
             </ng-template>
           </ngx-datatable-column>
@@ -119,25 +170,36 @@
 
 
           <!-- añadir / editar / borrar -->
-          <ngx-datatable-column [width]="50" [sortable]="false" [draggable]="false" [resizeable]="false">
+          <ngx-datatable-column [width]="50"
+                                [sortable]="false"
+                                [draggable]="false"
+                                [resizeable]="false">
             <ng-template ngx-datatable-header-template>
-              <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-outline-success"><i
-                  class="fa-solid fa-circle-plus"></i> Nuevo</button>
+              <button type="button"
+                      class="btn btn-sm waves-effect waves-light btn-rounded btn-outline-success"><i class="fa-solid fa-circle-plus"></i> Nuevo</button>
             </ng-template>
-            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-              <a href="javascript: void(0);" (click)="editRow(row)" class="link mr-2" placement="top"
-                data-toggle="tooltip" title="Editar">
+            <ng-template let-row="row"
+                         let-value="value"
+                         ngx-datatable-cell-template>
+              <a href="javascript: void(0);"
+                 (click)="editRow(row)"
+                 class="link mr-2"
+                 placement="top"
+                 data-toggle="tooltip"
+                 title="Editar">
                 <i class="fa-regular fa-pen-to-square fa-lg"></i>
               </a>
               <span *ngIf="row.id!=usuarioSrv.userdata.id">
-                <a (click)="deleteUsr(row)" class="link mr-2 tomato" placement="top" data-toggle="tooltip"
-                  title="Borrar">
+                <a (click)="deleteUsr(row)"
+                   class="link mr-2 tomato"
+                   placement="top"
+                   data-toggle="tooltip"
+                   title="Borrar">
                   <i class="fa-regular fa-trash-can fa-lg"></i>
                 </a>
               </span>
             </ng-template>
           </ngx-datatable-column>
-
 
         </ngx-datatable>
 

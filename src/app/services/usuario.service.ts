@@ -134,7 +134,24 @@ export class UsuarioService {
     return this.http.get<ApiResp>(path, { headers: cabeceras })
       .pipe(
         catchError(error => {
-          this.notificacionesService.aviso('error', `El sistema ha devuelto un error. <br><i>Asegurate de estar autorizado para hacer esta operación</i>`);
+          this.notificacionesService.aviso('error', environment.apiErrorAuth);
+          return throwError(() => new Error(error));
+        })
+      )
+  }
+
+
+  deleteUsrFoto(usuario: Usuario) {
+    const token = localStorage.getItem('token') || '';
+    const cabeceras = new HttpHeaders().append(
+      'Authorization', 'Bearer ' + token
+    );
+
+    const path = `${this.apiURL}/userDeleteFoto/${usuario.id}`;
+    return this.http.get<ApiResp>(path, { headers: cabeceras })
+      .pipe(
+        catchError(error => {
+          this.notificacionesService.aviso('error', environment.apiErrorAuth);
           return throwError(() => new Error(error));
         })
       )
