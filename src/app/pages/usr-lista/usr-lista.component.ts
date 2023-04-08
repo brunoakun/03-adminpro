@@ -74,8 +74,9 @@ export class UsrListaComponent implements OnInit {
     // this.filtro(evento, campo);
   }
 
-  editRow(row: any) {
+  editRow(row: Usuario) {
     this.notificacionesSrv.aviso('info', `editar id ${row.id}`)
+    
   }
 
   deleteUsr(row: any) {
